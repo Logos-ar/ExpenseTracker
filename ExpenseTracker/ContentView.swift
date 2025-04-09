@@ -39,9 +39,12 @@ struct ContentView: View {
         }
             .ignoresSafeArea()
             .onAppear { //TODO: Make it so this changes one second after finished loading
-            withAnimation(.spring(response: 0.9, dampingFraction: 0.9, blendDuration: 0)){
-                hasStarted.toggle()
-            }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation(.spring(response: 0.9, dampingFraction: 0.9, blendDuration: 0)){
+                        hasStarted.toggle()
+                        }
+                }
+            
         }
     }
 }
